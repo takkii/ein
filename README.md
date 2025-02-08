@@ -9,6 +9,12 @@ LICENSE) [![GitHub release](https://img.shields.io/github/release/takkii/ein.svg
 <br />
 
 <div align="center">
+  <img src="https://github.com/takkii/photo/blob/main/images/real.gif" alt="real images" title="logo">
+</div>
+
+<br />
+
+<div align="center">
   <h4><p>The Input Completion List Uses a Dictionary.</p></h4>
 </div>
 
