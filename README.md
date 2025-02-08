@@ -15,7 +15,7 @@ LICENSE) [![GitHub release](https://img.shields.io/github/release/takkii/ein.svg
 <br />
 
 <div align="center">
-  <h4><p>The Input Completion List Uses a Dictionary.</p></h4>
+  <h3><p>The Input Completion List Uses a Dictionary (same as graze).</p></h3>
 </div>
 
 <br />
