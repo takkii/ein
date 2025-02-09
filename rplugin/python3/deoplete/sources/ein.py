@@ -1,5 +1,6 @@
 import gc
 import os
+import platform
 import re
 import sys
 import traceback
@@ -19,7 +20,7 @@ class Source(Base):
         super().__init__(vim)
         self.name: Optional[str] = 'ein'
         self.filetypes = ['javascript', 'typescript', 'html']
-        mark_synbol: Optional[str] = '[python: ' + str(sys.version) + ']'
+        mark_synbol: Optional[str] = '[python: ' + str(platform.python_version()) + ']'
         self.mark = str(mark_synbol)
         js_match: Optional[list] = [r'\.[a-zA-Z0-9_?!]*|[a-zA-Z]\w*::\w*']
         html_match: Optional[list] = [r'[<a-zA-Z(?: .+?)?>.*?<\/a-zA-Z>]']
