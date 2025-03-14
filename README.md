@@ -13,7 +13,7 @@
 <br />
 
 <div align="center">
-  <h3><p>The Input Completion List Uses a Dictionary (same as graze).</p></h3>
+  <h3><p>The Input Completion List Use <a href="https://github.com/takkii/dict">dict</a> project.</p></h3>
 </div>
 
 <br />
