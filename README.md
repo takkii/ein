@@ -22,13 +22,3 @@ LICENSE) [![GitHub release](https://img.shields.io/github/release/takkii/ein.svg
 </div>
 
 <br />
-
-<div align="center">
-  <p>how to use.</p>
-</div>
-
-<div align="center">
-   <p>Please read me <a href="https://github.com/takkii/ein/wiki/manual">here</a> !</p>
-</div>
-
-<br />
