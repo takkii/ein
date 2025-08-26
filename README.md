@@ -1,11 +1,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![MIT
 License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](
-LICENSE) [![GitHub release](https://img.shields.io/github/release/takkii/phantom.svg?style=flat)](GitHub) [![GitHub Status](https://img.shields.io/github/last-commit/takkii/phantom.svg?style=flat)](GitHub)
+LICENSE) [![GitHub release](https://img.shields.io/github/release/takkii/ein.svg?style=flat)](GitHub) [![GitHub Status](https://img.shields.io/github/last-commit/takkii/ein.svg?style=flat)](GitHub)
 
 <br />
 
 <div align="center">
-  <h2><p>phantom is <a href="https://github.com/Shougo/deoplete.nvim">deoplete.nvim</a> plugins.</p></h2>
+  <h2><p>ein is <a href="https://github.com/Shougo/deoplete.nvim">deoplete.nvim</a> plugins.</p></h2>
 </div>
 
 <br />
@@ -18,7 +18,7 @@ LICENSE) [![GitHub release](https://img.shields.io/github/release/takkii/phantom
 <br />
 
 <div align="center">
-  <img src="https://github.com/takkii/photo/blob/main/images/phantom.gif" alt="phantom images" title="logo">
+  <img src="https://github.com/takkii/photo/blob/main/images/real.gif" alt="ein images" title="logo">
 </div>
 
 <br />
@@ -28,7 +28,7 @@ LICENSE) [![GitHub release](https://img.shields.io/github/release/takkii/phantom
 </div>
 
 <div align="center">
-   <p>Please read me <a href="https://github.com/takkii/phantom/wiki/manual">here</a> !</p>
+   <p>Please read me <a href="https://github.com/takkii/ein/wiki/manual">here</a> !</p>
 </div>
 
 <br />
