@@ -1,4 +1,5 @@
 import gc
+import numpy as np
 import os
 import platform
 import re
@@ -19,16 +20,18 @@ class Source(Base):
     def __init__(self, vim):
         super().__init__(vim)
         self.name: Optional[str] = 'ein'
-        self.filetypes = ['javascript', 'typescript', 'html']
-        mark_synbol: Optional[str] = '[python: ' + str(platform.python_version()) + ']'
+        self.filetypes = ['jscript', 'typescript', 'html']
+        mark_synbol: Optional[str] = '[python: ' + str(
+            platform.python_version()) + ']'
         self.mark = str(mark_synbol)
-        js_match: Optional[list] = [r'\.[a-zA-Z0-9_?!]*|[a-zA-Z]\w*::\w*']
-        html_match: Optional[list] = [r'[<a-zA-Z(?: .+?)?>.*?<\/a-zA-Z>]']
-        self.input_pattern: Optional[str] = '|'.join(js_match + html_match)
+        js_match = [r'\.[a-zA-Z0-9_?!]*|[a-zA-Z]\w*::\w*']
+        slash_no_match = [r'[;/[^¥/]\*/]']
+        self.input_pattern = '|'.join(js_match + slash_no_match)
         self.rank = 500
 
     def get_complete_position(self, context):
-        m = re.search('[a-zA-Z0-9_?!]*$', context['input'])
+        js_complete: Optional[str] = '[a-zA-Z0-9_?!]*$'
+        m = re.search(js_complete, context['input'])
         return m.start() if m else -1
 
     def gather_candidates(self, context):
@@ -39,38 +42,28 @@ class Source(Base):
 
             # 3.5 and higher, 4.x or less,python version is required.
             if (py_mj == 3 and py_mi > 4) or (py_mj < 4):
-
-                # Settings, vim-plug | vim path is true/false folder search.
-                vim_f: Optional[str] = '~/.vim/plugged/dict/load/js/'
-                vim_t = '~/.vim/plugged/dict/load/js/javascript.txt'
-
                 # Settings, $HOME/dict path is true/false folder search.
-                loc_f: Optional[str] = '~/dict/'
-                loc_t: Optional[str] = '~/dict/javascript.txt'
+                loc_t: Optional[str] = 'js/'
 
-                # Use vim-plug | vim, Set the dictionary.
-                if os.path.exists(os.path.expanduser(vim_f)):
+                paths = [
+                    os.path.expanduser(os.path.join(p, loc_t)) for p in [
+                        '~/GitHub/dict/load/',
+                        '~/.vim/plugged/dict/load/',
+                        '~/.neovim/plugged/dict/load/'
+                    ]
+                ]
 
-                    # User side, normal function.
-                    with open(os.path.expanduser(vim_t)) as r_vim:
-                        vim_py: Optional[list] = list(r_vim.readlines())
-                        vim_comp: Optional[list] = [s.rstrip() for s in vim_py]
-                        vim_comp.sort(key=itemgetter(0))
-                        return vim_comp
+                path = next(p for p in paths if os.path.exists(p))
+                el_dict: Optional[str] = 'javascript.txt'
+                el_mod_fn = os.path.join(path, el_dict)
 
-                # $HOME/dict, Set the dictionary to develop mode.
-                elif os.path.exists(os.path.expanduser(loc_f)):
-
-                    # Function change destination.
-                    with open(os.path.expanduser(loc_t)) as rb_mt:
-                        dev_py: Optional[list] = list(rb_mt.readlines())
-                        dev_comp: Optional[list] = [s.rstrip() for s in dev_py]
-                        sorted(dev_comp, key=itemgetter(0))
-                        return dev_comp
-
-                # Config Folder not found.
-                else:
-                    raise ValueError("None, Please Check the dict Folder")
+                # Get Receiver/diamond behavior.
+                with open(el_mod_fn) as rb_mt:
+                    dev_py: Optional[list] = list(rb_mt.readlines())
+                    sort_js = np.array(dev_py).tolist()
+                    dev_comp: Optional[list] = [s.rstrip() for s in sort_js]
+                    sorted(dev_comp, key=itemgetter(0))
+                    return dev_comp
 
             # Python_VERSION: 3.5 or higher and 4.x or less.
             else:
@@ -78,9 +71,18 @@ class Source(Base):
 
         # TraceBack.
         except Exception:
+            # ein file path.
+            filepath = os.path.expanduser(
+                "~/.vim/plugged/ein/rplugin/python3/deoplete/sources/ein.py")
+
+            basename_without_ext = os.path.splitext(
+                os.path.basename(filepath))[0]
+            filename = (str(basename_without_ext) + "_log")
+
             # Load/Create LogFile.
-            ein: Optional[str] = os.path.expanduser('~/ein_log/')
-            db_w: Optional[str] = os.path.expanduser('~/ein_log/debug.log')
+            ein: Optional[str] = str(filename)
+            db_w: Optional[str] = os.path.expanduser('~/' + filename +
+                                                     '/debug.log')
 
             # Load the dictionary.
             if os.path.isdir(ein):
@@ -92,7 +94,7 @@ class Source(Base):
 
             # ein Foler not found.
             else:
-                raise ValueError("None, Please Create $HOME/ein_log Folder.")
+                raise ValueError("None, Please Check the ein Folder.")
 
         # Custom Exception.
         except ValueError as ext:
